@@ -2,7 +2,7 @@
 <html>
 
 <head>
-    <title>Webslesson Tutorial | JSON - Dynamic Dependent Dropdown List using Jquery and Ajax</title>
+    <title>Testing Beer Dropdown Json</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
@@ -11,17 +11,17 @@
 <body>
     <br /><br />
     <div class="container" style="width:600px;">
-        <h2 align="center">JSON - Dynamic Dependent Dropdown List using Jquery and Ajax</h2><br /><br />
-        <select name="country" id="country" class="form-control input-lg">
-            <option value="">Select country</option>
+        <h2 align="center">Make your beer choice</h2><br /><br />
+        <select name="category" id="category" class="form-control input-lg">
+            <option value="">Select category</option>
         </select>
         <br />
-        <select name="state" id="state" class="form-control input-lg">
-            <option value="">Select state</option>
+        <select name="type" id="type" class="form-control input-lg">
+            <option value="">Select type</option>
         </select>
         <br />
-        <select name="city" id="city" class="form-control input-lg">
-            <option value="">Select city</option>
+        <select name="brewery" id="brewery" class="form-control input-lg">
+            <option value="">Select brewery</option>
         </select>
     </div>
 </body>
@@ -33,7 +33,7 @@
 
 
 
-        load_json_data('country');
+        load_json_data('category');
 
         function load_json_data(id, parent_id) {
             var html_code = '';
@@ -44,11 +44,11 @@
 
 
 
-            $.getJSON('country_state_city.json', function (data) {
+            $.getJSON('beers.json', function (data) {
 
                 html_code += '<option value="">Select ' + id + '</option>';
                 $.each(data, function (key, value) {
-                    if (id == 'country') {
+                    if (id == 'category') {
                         if (value.parent_id == '0') {
                             html_code += '<option value="' + value.id + '">' + value.name + '</option>';
                         }
@@ -64,23 +64,23 @@
 
         }
 
-        $(document).on('change', '#country', function () {
-            var country_id = $(this).val();
-            if (country_id != '') {
-                load_json_data('state', country_id);
+        $(document).on('change', '#category', function () {
+            var category_id = $(this).val();
+            if (category_id != '') {
+                load_json_data('type', category_id);
             }
             else {
-                $('#state').html('<option value="">Select state</option>');
-                $('#city').html('<option value="">Select city</option>');
+                $('#type').html('<option value="">Select type</option>');
+                $('#brewery').html('<option value="">Select brewery</option>');
             }
         });
-        $(document).on('change', '#state', function () {
-            var state_id = $(this).val();
-            if (state_id != '') {
-                load_json_data('city', state_id);
+        $(document).on('change', '#type', function () {
+            var type_id = $(this).val();
+            if (type_id != '') {
+                load_json_data('brewery', type_id);
             }
             else {
-                $('#city').html('<option value="">Select city</option>');
+                $('#brewery').html('<option value="">Select brewery</option>');
             }
         });
     });
