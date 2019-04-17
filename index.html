@@ -11,7 +11,7 @@
 <body>
     <br /><br />
     <div class="container" style="width:600px;">
-        <h2 align="center">Make your beer choice</h2><br /><br />
+        <h2 align="center">Make your beer choice!</h2><br /><br />
         <select name="category" id="category" class="form-control input-lg">
             <option value="">Select category</option>
         </select>
@@ -22,6 +22,10 @@
         <br />
         <select name="brewery" id="brewery" class="form-control input-lg">
             <option value="">Select brewery</option>
+        </select>
+        <br />
+        <select name="beer" id="beer" class="form-control input-lg">
+            <option value="">Select beer</option>
         </select>
     </div>
 </body>
@@ -37,12 +41,6 @@
 
         function load_json_data(id, parent_id) {
             var html_code = '';
-
-
-
-
-
-
 
             $.getJSON('beers.json', function (data) {
 
@@ -81,9 +79,19 @@
             var type_id = $(this).val();
             if (type_id != '') {
                 load_json_data('brewery', type_id);
+                $('#beer').html('<option value="">Select beer</option>');
             }
             else {
                 $('#brewery').html('<option value="">Select brewery</option>');
+            }
+        });
+        $(document).on('change', '#brewery', function () {
+            var type_id = $(this).val();
+            if (type_id != '') {
+                load_json_data('beer', type_id);
+            }
+            else {
+                $('#beer').html('<option value="">Select beer</option>');
             }
         });
     });
