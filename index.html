@@ -11,7 +11,7 @@
 <body>
     <br /><br />
     <div class="container" style="width:600px;">
-        <h2 align="center">Make your beer choice!</h2><br /><br />
+        <h2 align="center">Make your beer choice</h2><br /><br />
         <select name="category" id="category" class="form-control input-lg">
             <option value="">Select category</option>
         </select>
@@ -64,12 +64,13 @@
 
         }
 
+
         $(document).on('change', '#category', function () {
             var category_id = $(this).val();
             if (category_id != '') {
                 load_json_data('type', category_id);
                 //probando cambio de todo
-                load_json_data('brewery', type_id);
+                $('#brewery').html('<option value="">Select brewery</option>');
             }
             else {
                 $('#type').html('<option value="">Select type</option>');
